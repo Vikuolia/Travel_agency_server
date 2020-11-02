@@ -1,16 +1,14 @@
 package com.example.travel_agency.entity;
 
 import lombok.NoArgsConstructor;
-
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import java.util.UUID;
 import java.util.Set;
+import java.util.UUID;
 
 
 @NoArgsConstructor

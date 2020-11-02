@@ -37,6 +37,14 @@ public class Client {
         this.frequentBuyer = false;
     }
 
+    public int getAge(){return this.age;}
+
+    public int getBackground(){return this.background;}
+
+    public boolean isStudent(){return this.student;}
+
+    public boolean isFrequentBuyer(){return this.frequentBuyer;}
+
     @Override
     public String toString(){
         return "\n-CLIENT-\nName: " + this.name + "\nSurname: " + this.surname + "\nAge: " +

@@ -35,4 +35,8 @@ public class Voucher {
     }
 
     public double getPrice(){return this.price;}
+
+    public int getMax_people(){return this.max_people;}
+
+    public String getName(){return this.name;}
 }

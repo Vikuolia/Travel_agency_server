@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -43,7 +44,7 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "hike_id")
     )
-    List<Hike> hikes;
+    List<Hike> hikes = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -51,7 +52,7 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "voucher_id")
     )
-    List<Voucher> vouchers;
+    List<Voucher> vouchers = new ArrayList<>();
 
     public Order(Client client, Worker seller){
         this.orderId = UUID.randomUUID();
@@ -81,4 +82,6 @@ public class Order {
     public List<Hike> getHikes(){return hikes;}
 
     public List<Voucher> getVouchers(){return vouchers;}
+
+    public Client getClient(){return this.client;}
 }

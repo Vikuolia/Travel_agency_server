@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -31,7 +31,7 @@ public class Hike {
     private Instructor instructor;
 
     @ManyToMany(mappedBy = "hikes")
-    Set<Order> orders;
+    List<Order> orders;
 
     public Hike(String name, Date date, int duration, int complexity, int min_age, int max_people,
                 double price){
@@ -60,4 +60,6 @@ public class Hike {
     public int getMin_age(){return this.min_age;}
 
     public int getMax_people(){return  this.max_people;}
+
+    public String getName(){return this.name;}
 }

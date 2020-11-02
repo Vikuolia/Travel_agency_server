@@ -19,9 +19,9 @@ public interface OrderService {
 
     void deleteClientOrders(Client client);
 
-    void addHike(Order order, Hike hike);
+    String addHike(Order order, Hike hike);
 
-    void addVoucher(Order order, Voucher voucher);
+    String addVoucher(Order order, Voucher voucher);
 
     double getPrice(Order order);
 
