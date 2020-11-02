@@ -1,6 +1,8 @@
 package com.example.travel_agency.service;
 
 import com.example.travel_agency.entity.Hike;
+import com.example.travel_agency.entity.Instructor;
+import javassist.NotFoundException;
 
 import java.util.List;
 
@@ -12,9 +14,13 @@ public interface HikeService {
 
     List<Hike> getAvailable();
 
-    Hike getByName(String name);
+    Hike getById(String id) throws NotFoundException;
 
-    void deleteById(String Id);
+    void deleteById(String id);
 
     void deleteNotAvailable();
+
+    void setInstructor(Hike hike, Instructor instructor);
+
+    void changeInstructor(Hike hike, Instructor instructor);
 }

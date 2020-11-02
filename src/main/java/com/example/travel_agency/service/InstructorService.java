@@ -1,6 +1,7 @@
 package com.example.travel_agency.service;
 
 import com.example.travel_agency.entity.Instructor;
+import javassist.NotFoundException;
 
 import java.util.List;
 
@@ -10,9 +11,7 @@ public interface InstructorService {
 
     List<Instructor> getAll();
 
-    Instructor getById(String id);
-
-    Instructor getByBackground(int background);
+    Instructor getById(String id) throws NotFoundException;
 
     void deleteById(String id);
 }

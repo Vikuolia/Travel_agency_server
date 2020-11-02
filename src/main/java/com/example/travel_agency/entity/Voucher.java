@@ -33,4 +33,6 @@ public class Voucher {
         this.max_people = max_people;
         this.price = price;
     }
+
+    public double getPrice(){return this.price;}
 }

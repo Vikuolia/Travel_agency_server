@@ -17,13 +17,25 @@ public class Order {
 
     @Id
     private UUID orderId;
+
+    @Column(nullable = false)
     private Date date;
-    private int price;
+
+    @Column(nullable = false)
+    private double price;
+
+    @Column(nullable = false)
     private Status status;
 
     @ManyToOne
+    @MapsId("clientId")
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
+
+    @ManyToOne
+    @MapsId("workerId")
+    @JoinColumn(name = "worker_id", nullable = false)
+    private Worker seller;
 
     @ManyToMany
     @JoinTable(
@@ -41,12 +53,32 @@ public class Order {
     )
     List<Voucher> vouchers;
 
-
-    public Order(Client client){
+    public Order(Client client, Worker seller){
         this.orderId = UUID.randomUUID();
         this.client = client;
+        this.seller = seller;
         this.date = new Date();
         this.price = 0;
         this.status = Status.inProgress;
     }
+
+    public void updateStatus(Status newStatus){
+        this.status = newStatus;
+    }
+
+    public void addHike(Hike hike){
+        hikes.add(hike);
+    }
+
+    public void addVoucher(Voucher voucher){
+        vouchers.add(voucher);
+    }
+
+    public void setPrice(double newPrice){
+        this.price = newPrice;
+    }
+
+    public List<Hike> getHikes(){return hikes;}
+
+    public List<Voucher> getVouchers(){return vouchers;}
 }
