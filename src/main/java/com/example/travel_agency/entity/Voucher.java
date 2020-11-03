@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Voucher {
 
     @Id
-    private UUID voucherId;
+    private String voucherId;
 
     private String name;
     private Date date;
@@ -27,7 +27,7 @@ public class Voucher {
     Set<Order> orders;
 
     public Voucher(String name, Date date, int duration, int max_people, int price){
-        this.voucherId = UUID.randomUUID();
+        this.voucherId = UUID.randomUUID().toString();
         this.date = date;
         this.duration = duration;
         this.max_people = max_people;

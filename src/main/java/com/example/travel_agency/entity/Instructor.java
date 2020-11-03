@@ -18,7 +18,8 @@ import java.util.UUID;
 public final class Instructor{
 
     @Id
-    private UUID instructorId;
+    private String instructorId;
+
     private String name;
     private String surname;
     private int background;
@@ -27,7 +28,7 @@ public final class Instructor{
     private Set<Hike> hikes;
 
     public Instructor(String name, String surname, int background){
-        this.instructorId = UUID.randomUUID();
+        this.instructorId = UUID.randomUUID().toString();
         this.name = name;
         this.surname = surname;
         this.background = background;

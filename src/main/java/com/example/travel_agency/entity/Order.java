@@ -17,7 +17,7 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    private UUID orderId;
+    private String orderId;
 
     @Column(nullable = false)
     private Date date;
@@ -55,7 +55,7 @@ public class Order {
     List<Voucher> vouchers = new ArrayList<>();
 
     public Order(Client client, Worker seller){
-        this.orderId = UUID.randomUUID();
+        this.orderId = UUID.randomUUID().toString();
         this.client = client;
         this.seller = seller;
         this.date = new Date();

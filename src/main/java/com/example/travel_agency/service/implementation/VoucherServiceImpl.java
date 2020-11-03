@@ -4,11 +4,13 @@ package com.example.travel_agency.service.implementation;
 import com.example.travel_agency.entity.Voucher;
 import com.example.travel_agency.repository.VoucherRepository;
 import com.example.travel_agency.service.VoucherService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VoucherServiceImpl implements VoucherService {
@@ -27,8 +29,10 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public List<Voucher> getByName(String name) {
-        return voucherRepository.findByName(name);
+    public Voucher getById(String id) throws NotFoundException {
+        Optional<Voucher> optionalVoucher = voucherRepository.findById(id);
+        if(optionalVoucher.isPresent()) return voucherRepository.findById(id).get();
+        else throw new NotFoundException(String.format("Voucher with id: %s does not exist", id));
     }
 
     @Override

@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface VoucherRepository extends CrudRepository<Voucher, String> {
-    List<Voucher> findByName(String name);
     List<Voucher> findByDateAfter(Date date);
     void deleteAllByDateBefore(Date date);
 }

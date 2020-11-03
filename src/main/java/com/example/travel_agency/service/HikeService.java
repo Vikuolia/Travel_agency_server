@@ -20,7 +20,5 @@ public interface HikeService {
 
     void deleteNotAvailable();
 
-    void setInstructor(Hike hike, Instructor instructor);
-
     void changeInstructor(Hike hike, Instructor instructor);
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Hike {
 
     @Id
-    private UUID hikeId;
+    private String hikeId;
 
     private String name;
     private Date date;
@@ -34,8 +34,8 @@ public class Hike {
     List<Order> orders;
 
     public Hike(String name, Date date, int duration, int complexity, int min_age, int max_people,
-                double price){
-        this.hikeId = UUID.randomUUID();
+                double price, Instructor instructor){
+        this.hikeId = UUID.randomUUID().toString();
         this.name = name;
         this.date = date;
         this.duration = duration;
@@ -43,9 +43,6 @@ public class Hike {
         this.min_age = min_age;
         this.max_people = max_people;
         this.price = price;
-    }
-
-    public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
 

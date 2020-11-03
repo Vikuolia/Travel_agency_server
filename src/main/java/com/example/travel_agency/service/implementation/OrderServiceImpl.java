@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    private final OrderRepository orderRepository;
+
     @Autowired
-    private OrderRepository orderRepository;
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     public Order addOrder(Order newOrder) {
@@ -45,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteClientOrders(Client client) {
-        orderRepository.findAllByClient(client);
+        orderRepository.deleteAllByClient(client);
     }
 
     @Override

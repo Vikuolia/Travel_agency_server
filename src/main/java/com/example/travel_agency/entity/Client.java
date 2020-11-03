@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Client {
 
     @Id
-    private UUID clientId;
+    private String clientId;
 
     private String name;
     private String surname;
@@ -28,7 +28,7 @@ public class Client {
     Set<Order> orders;
 
     public Client(String name, String surname, int age, int background, boolean student){
-        this.clientId = UUID.randomUUID();
+        this.clientId = UUID.randomUUID().toString();
         this.name = name;
         this.surname = surname;
         this.age = age;

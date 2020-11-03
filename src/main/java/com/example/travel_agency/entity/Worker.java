@@ -18,7 +18,8 @@ import java.util.UUID;
 public class Worker {
 
     @Id
-    private UUID workerId;
+    private String workerId;
+
     private String name;
     private String surname;
     private Position position;
@@ -27,7 +28,7 @@ public class Worker {
     Set<Order> orders;
 
     public Worker(String name, String surname, Position position){
-        this.workerId = UUID.randomUUID();
+        this.workerId = UUID.randomUUID().toString();
         this.name = name;
         this.position = position;
     }
