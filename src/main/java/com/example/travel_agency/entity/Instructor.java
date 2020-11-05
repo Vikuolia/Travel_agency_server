@@ -1,5 +1,8 @@
 package com.example.travel_agency.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
@@ -7,13 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
-import java.util.UUID;
+import java.util.List;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @EnableAutoConfiguration
 @Entity
+@Data
 @Table(name = "INSTRUCTOR")
 public final class Instructor{
 
@@ -24,11 +28,11 @@ public final class Instructor{
     private String surname;
     private int background;
 
+    @JsonManagedReference(value="hike-instructor")
     @OneToMany(mappedBy = "instructor")
-    private Set<Hike> hikes;
+    private List<Hike> hikes;
 
     public Instructor(String name, String surname, int background){
-        this.instructorId = UUID.randomUUID().toString();
         this.name = name;
         this.surname = surname;
         this.background = background;

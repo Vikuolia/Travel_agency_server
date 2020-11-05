@@ -3,8 +3,6 @@ package com.example.travel_agency.controller;
 import com.example.travel_agency.entity.Hike;
 import com.example.travel_agency.service.HikeService;
 import javassist.NotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,25 +10,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/instructor")
-@AllArgsConstructor
-@NoArgsConstructor
+@RequestMapping("/hike")
 public class HikeController {
 
+    private final HikeService hikeService;
+
     @Autowired
-    private HikeService hikeService;
+    public HikeController(HikeService hikeService) {
+        this.hikeService = hikeService;
+    }
 
     @PostMapping
     public Hike addHike(@RequestBody Hike hike){
         return hikeService.addHike(hike);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Hike> getAllHikes(){
         return hikeService.getAll();
     }
 
-    @GetMapping
+    @GetMapping("/available")
     public List<Hike> getAvailableHikes(){
         return hikeService.getAvailable();
     }

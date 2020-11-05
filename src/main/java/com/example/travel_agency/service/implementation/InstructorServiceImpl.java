@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class InstructorServiceImpl implements InstructorService {
 
+    private final InstructorRepository instructorRepository;
+
     @Autowired
-    private InstructorRepository instructorRepository;
+    public InstructorServiceImpl(InstructorRepository instructorRepository) {
+        this.instructorRepository = instructorRepository;
+    }
 
     @Override
     public Instructor addInstructor(Instructor instructor) {

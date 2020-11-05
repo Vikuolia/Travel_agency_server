@@ -52,34 +52,34 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.deleteAllByClient(client);
     }
 
-    @Override
-    public String addHike(Order order, Hike hike) {
+//    @Override
+//    public String addHike(Order order, Hike hike) {
+//
+//        int client_age = order.getClient().getAge();
+//        int client_background = order.getClient().getBackground();
+//        int hike_participants = order.getHikes().size();
+//
+//        if(client_age >= hike.getMin_age() && client_background >= hike.getComplexity() &&
+//                hike_participants < hike.getMax_people()) {
+//
+//            order.addHike(hike);
+//            return String.format("Hike %s is added to order", hike.getName());
+//        }
+//
+//        else return String.format("Hike %s is NOT added to order. Choose something else, please", hike.getName());
+//    }
 
-        int client_age = order.getClient().getAge();
-        int client_background = order.getClient().getBackground();
-        int hike_participants = order.getHikes().size();
-
-        if(client_age >= hike.getMin_age() && client_background >= hike.getComplexity() &&
-                hike_participants < hike.getMax_people()) {
-
-            order.addHike(hike);
-            return String.format("Hike %s is added to order", hike.getName());
-        }
-
-        else return String.format("Hike %s is NOT added to order. Choose something else, please", hike.getName());
-    }
-
-    @Override
-    public String addVoucher(Order order, Voucher voucher) {
-
-        int voucher_participants = order.getVouchers().size();
-
-        if(voucher_participants < voucher.getMax_people()) {
-            order.addVoucher(voucher);
-            return String.format("Voucher %s is added to order", voucher.getName());
-        }
-        else return String.format("All vouchers %s are sold. Choose something else, please", voucher.getName());
-    }
+//    @Override
+//    public String addVoucher(Order order, Voucher voucher) {
+//
+//        int voucher_participants = order.getVouchers().size();
+//
+//        if(voucher_participants < voucher.getMax_people()) {
+//            order.addVoucher(voucher);
+//            return String.format("Voucher %s is added to order", voucher.getName());
+//        }
+//        else return String.format("All vouchers %s are sold. Choose something else, please", voucher.getName());
+//    }
 
     @Override
     public void sellOrder(Order order) {

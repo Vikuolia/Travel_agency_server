@@ -1,16 +1,22 @@
 package com.example.travel_agency.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.List;
 
 @NoArgsConstructor
 @EnableAutoConfiguration
 @Entity
+@Data
+@AllArgsConstructor
 @Table(name = "VOUCHER")
 public class Voucher {
 
@@ -18,16 +24,16 @@ public class Voucher {
     private String voucherId;
 
     private String name;
-    private Date date;
+    private String date;
     private int duration;
     private int max_people;
     private double price;
 
+    @JsonIgnoreProperties("vouchers")
     @ManyToMany(mappedBy = "vouchers")
-    Set<Order> orders;
+    List<Order> orders;
 
-    public Voucher(String name, Date date, int duration, int max_people, int price){
-        this.voucherId = UUID.randomUUID().toString();
+    public Voucher(String name, String date, int duration, int max_people, int price){
         this.date = date;
         this.duration = duration;
         this.max_people = max_people;

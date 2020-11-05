@@ -15,8 +15,12 @@ import java.util.Optional;
 @Service
 public class VoucherServiceImpl implements VoucherService {
 
+    private final VoucherRepository voucherRepository;
+
     @Autowired
-    private VoucherRepository voucherRepository;
+    public VoucherServiceImpl(VoucherRepository voucherRepository) {
+        this.voucherRepository = voucherRepository;
+    }
 
     @Override
     public Voucher addVoucher(Voucher newVoucher) {

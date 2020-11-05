@@ -8,6 +8,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +16,12 @@ import java.util.Optional;
 @Service
 public class HikeServiceImpl implements HikeService {
 
+    private final HikeRepository hikeRepository;
+
     @Autowired
-    private HikeRepository hikeRepository;
+    public HikeServiceImpl(HikeRepository hikeRepository) {
+        this.hikeRepository = hikeRepository;
+    }
 
     @Override
     public Hike addHike(Hike newHike) {
@@ -42,17 +47,14 @@ public class HikeServiceImpl implements HikeService {
 
     @Override
     public List<Hike> getAvailable() {
-        return hikeRepository.findAllHikeByDateAfter(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return hikeRepository.findAllByDateAfter(sdf.format(new Date()));
     }
 
     @Override
     public void deleteNotAvailable() {
-        hikeRepository.deleteAllHikeByDateBefore(new Date());
-    }
-
-    @Override
-    public void setInstructor(Hike hike, Instructor instructor) {
-        hike.setInstructor(instructor);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        hikeRepository.deleteAllHikeByDateBefore(sdf.format(new Date()));
     }
 
     @Override

@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public final class WorkerServiceImpl implements WorkerService {
 
+    private final WorkerRepository workerRepository;
+
     @Autowired
-    private WorkerRepository workerRepository;
+    public WorkerServiceImpl(WorkerRepository workerRepository) {
+        this.workerRepository = workerRepository;
+    }
 
     @Override
     public Worker addWorker(Worker newWorker) {

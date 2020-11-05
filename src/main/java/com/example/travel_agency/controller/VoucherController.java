@@ -3,22 +3,23 @@ package com.example.travel_agency.controller;
 import com.example.travel_agency.entity.Voucher;
 import com.example.travel_agency.service.VoucherService;
 import javassist.NotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/voucher")
-@AllArgsConstructor
-@NoArgsConstructor
 public class VoucherController {
 
+    private final VoucherService voucherService;
+
     @Autowired
-    private VoucherService voucherService;
+    public VoucherController(VoucherService voucherService) {
+        this.voucherService = voucherService;
+    }
 
     @PostMapping
     public Voucher addVoucher(@RequestBody Voucher voucher){
@@ -30,8 +31,8 @@ public class VoucherController {
         return voucherService.getAll();
     }
 
-    @GetMapping
-    public List<Voucher> getAvailableVouchers(){ return voucherService.getAvailable(); }
+    @GetMapping("{date}")
+    public List<Voucher> getAvailableVouchers(@PathVariable Date date){ return voucherService.getAvailable(); }
 
     @GetMapping("{voucherId}")
     public Voucher getVouchersById(@PathVariable String voucherId)throws NotFoundException {

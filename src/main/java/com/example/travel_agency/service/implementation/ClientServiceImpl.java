@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class ClientServiceImpl implements ClientService {
 
+    private final ClientRepository clientRepository;
+
     @Autowired
-    private ClientRepository clientRepository;
+    public ClientServiceImpl(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
     @Override
     public Client addClient(Client newClient) {
@@ -36,5 +40,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteById(String id) {
         clientRepository.deleteById(id);
+    }
+
+    @Override
+    public void makeFrequentBuyer(Client client) {
+        client.makeFrequentBuyer();
     }
 }

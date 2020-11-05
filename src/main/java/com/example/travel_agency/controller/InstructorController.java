@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/instructor")
 public class InstructorController {
 
-    InstructorService instructorService;
+    private final InstructorService instructorService;
 
     @Autowired
     public InstructorController(InstructorService instructorService) {

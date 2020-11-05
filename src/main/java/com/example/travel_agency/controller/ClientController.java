@@ -3,8 +3,6 @@ package com.example.travel_agency.controller;
 import com.example.travel_agency.entity.Client;
 import com.example.travel_agency.service.ClientService;
 import javassist.NotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +11,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/client")
-@AllArgsConstructor
-@NoArgsConstructor
 public class ClientController {
 
+    private final ClientService clientService;
+
     @Autowired
-    private ClientService clientService;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @PostMapping
-    public Client addClient(@RequestBody Client client){ return clientService.addClient(client);
-    }
+    public Client addClient(@RequestBody Client client){ return clientService.addClient(client); }
 
     @GetMapping
     public List<Client> getAllClients(){

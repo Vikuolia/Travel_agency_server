@@ -1,5 +1,9 @@
 package com.example.travel_agency.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
@@ -7,12 +11,13 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @EnableAutoConfiguration
 @Entity
+@Data
 @Table(name = "ORDERS")
 public class Order {
 
@@ -20,7 +25,7 @@ public class Order {
     private String orderId;
 
     @Column(nullable = false)
-    private Date date;
+    private String date;
 
     @Column(nullable = false)
     private double price;
@@ -28,17 +33,18 @@ public class Order {
     @Column(nullable = false)
     private Status status;
 
+    @JsonBackReference(value="order-client")
     @ManyToOne
-    @MapsId("clientId")
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
+    @JsonBackReference(value="order-worker")
     @ManyToOne
-    @MapsId("workerId")
     @JoinColumn(name = "worker_id", nullable = false)
     private Worker seller;
 
     @ManyToMany
+    @JsonIgnoreProperties("orders")
     @JoinTable(
             name = "order_hike",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -47,6 +53,7 @@ public class Order {
     List<Hike> hikes = new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnoreProperties("orders")
     @JoinTable(
             name = "order_voucher",
             joinColumns = @JoinColumn(name = "order_id"),
@@ -55,10 +62,9 @@ public class Order {
     List<Voucher> vouchers = new ArrayList<>();
 
     public Order(Client client, Worker seller){
-        this.orderId = UUID.randomUUID().toString();
         this.client = client;
         this.seller = seller;
-        this.date = new Date();
+        this.date = new Date().toString();
         this.price = 0;
         this.status = Status.inProgress;
     }

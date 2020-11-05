@@ -3,8 +3,6 @@ package com.example.travel_agency.controller;
 
 import com.example.travel_agency.entity.Worker;
 import com.example.travel_agency.service.WorkerService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +11,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/worker")
-@AllArgsConstructor
-@NoArgsConstructor
 public class WorkerController {
 
+    private final WorkerService workerService;
+
     @Autowired
-    private WorkerService workerService;
+    public WorkerController(WorkerService workerService) {
+        this.workerService = workerService;
+    }
 
     @PostMapping
     public Worker addWorker(@RequestBody Worker worker){
@@ -27,7 +27,7 @@ public class WorkerController {
 
     @GetMapping
     public List<Worker> getAllWorkers(){
-        return  workerService.getAll();
+        return workerService.getAll();
     }
 
     @DeleteMapping("{workerId}")

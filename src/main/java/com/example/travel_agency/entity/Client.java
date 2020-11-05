@@ -1,16 +1,23 @@
 package com.example.travel_agency.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.*;
-import java.util.Set;
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.List;
 
 
 @NoArgsConstructor
+@AllArgsConstructor
 @EnableAutoConfiguration
 @Entity
+@Data
 @Table(name = "CLIENT")
 public class Client {
 
@@ -24,11 +31,11 @@ public class Client {
     private boolean student;
     private boolean frequentBuyer;
 
+    @JsonManagedReference(value="order-client")
     @OneToMany(mappedBy = "client")
-    Set<Order> orders;
+    List<Order> orders;
 
     public Client(String name, String surname, int age, int background, boolean student){
-        this.clientId = UUID.randomUUID().toString();
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -44,6 +51,8 @@ public class Client {
     public boolean isStudent(){return this.student;}
 
     public boolean isFrequentBuyer(){return this.frequentBuyer;}
+
+    public void makeFrequentBuyer(){this.frequentBuyer = true;}
 
     @Override
     public String toString(){

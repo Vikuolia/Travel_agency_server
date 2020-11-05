@@ -14,4 +14,6 @@ public interface ClientService {
     Client getById(String id) throws NotFoundException;
 
     void deleteById(String id);
+
+    void makeFrequentBuyer(Client client);
 }
